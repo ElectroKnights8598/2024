@@ -1,0 +1,87 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.6807503073695607,
+      "y": 6.712444649960525
+    },
+    "rotation": 64.23067237566137
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "armup"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "leftpath1"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "launchthenote"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "armdown"
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "leftpath2"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "intake"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "leftpath3"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "armup"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "launchthenote"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "folder": "left",
+  "choreoAuto": false
+}

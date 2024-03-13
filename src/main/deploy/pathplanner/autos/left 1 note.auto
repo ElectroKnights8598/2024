@@ -1,0 +1,43 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.6807503073695607,
+      "y": 6.712444649960525
+    },
+    "rotation": 57.99461679191653
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "leftpath1"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "armup"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "launchthenote"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "armdown"
+          }
+        }
+      ]
+    }
+  },
+  "folder": "left",
+  "choreoAuto": false
+}
