@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj.SerialPort;
 import frc.robot.Constants.DriveConstants;
 import frc.utils.SwerveUtils;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
+import com.ctre.phoenix6.hardware.Pigeon2;
 public class DriveSubsystem extends SubsystemBase {
 
   
@@ -45,7 +45,8 @@ public class DriveSubsystem extends SubsystemBase {
       DriveConstants.kBackRightChassisAngularOffset);
 
   // The gyro sensor
-  public  AHRS m_gyro = new AHRS(SerialPort.Port.kUSB1);
+  //public  AHRS m_gyro = new AHRS(SerialPort.Port.kUSB1);
+Pigeon2 m_gyro = new Pigeon2(14);
 private static  final DriveSubsystem m_drive = new DriveSubsystem();
 public static DriveSubsystem getInstance(){
   return m_drive;
@@ -63,7 +64,7 @@ public static DriveSubsystem getInstance(){
   // Odometry class for tracking robot pose
   SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(
       DriveConstants.kDriveKinematics,
-      Rotation2d.fromDegrees(-header()),
+      Rotation2d.fromDegrees(-m_gyro.getAngle()),
       new SwerveModulePosition[] {
           m_frontLeft.getPosition(),
           m_frontRight.getPosition(),
@@ -118,7 +119,7 @@ public double getspeed(){
     
     // Update the odometry in the periodic block
     m_odometry.update(
-        Rotation2d.fromDegrees(-header()),
+        Rotation2d.fromDegrees(-m_gyro.getAngle()),
         new SwerveModulePosition[] {
             m_frontLeft.getPosition(),
             m_frontRight.getPosition(),
@@ -164,7 +165,7 @@ public void driveRobotRelative(ChassisSpeeds speeds){
     return m_odometry.getPoseMeters();
   }
   public void resetgyro(){
-    m_gyro.zeroYaw();
+    m_gyro.reset();
   }
 
 
@@ -175,7 +176,7 @@ public void driveRobotRelative(ChassisSpeeds speeds){
    */
   public void resetOdometry(Pose2d pose) {
     m_odometry.resetPosition(
-        Rotation2d.fromDegrees(-header()),
+        Rotation2d.fromDegrees(-m_gyro.getAngle()),
         new SwerveModulePosition[] {
             m_frontLeft.getPosition(),
             m_frontRight.getPosition(),
@@ -256,7 +257,7 @@ public void driveRobotRelative(ChassisSpeeds speeds){
     SmartDashboard.putNumber("rotdilivered", rotDelivered);
     SwerveModuleState[] swerveModuleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(
         fieldRelative
-            ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeedDelivered, ySpeedDelivered, rotDelivered, Rotation2d.fromDegrees(-header()))
+            ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeedDelivered, ySpeedDelivered, rotDelivered, Rotation2d.fromDegrees(-m_gyro.getAngle()))
             : new ChassisSpeeds(xSpeedDelivered, ySpeedDelivered, rotDelivered));
     SwerveDriveKinematics.desaturateWheelSpeeds(
         swerveModuleStates, DriveConstants.kMaxSpeedMetersPerSecond);

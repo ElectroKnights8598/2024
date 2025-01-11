@@ -36,7 +36,7 @@ public final class Constants {
     public static final double kSoftLimitReverse = -1.15;
     public static final double kSoftLimitForward = 0.0;
 
-    public static final double kArmGearRatio = (1.0 / 25.0) * (28.0 / 50.0) * (16.0 / 64.0);
+    public static final double kArmGearRatio = (1.0 / 36.0) * (28.0 / 50.0) * (16.0 / 64.0);
     public static final double kPositionFactor =
         kArmGearRatio
             * 2.0
@@ -54,7 +54,7 @@ public final class Constants {
 
     public static final double kHomePosition = 0.0;
     public static final double kScoringPosition = 0.0;
-    public static final double kIntakePosition = -1.15;
+    public static final double kIntakePosition = -1.3;
   }
 
   public static final class Intake {
@@ -68,7 +68,7 @@ public final class Constants {
     public static final double kIntakePower = 0.5;
 
     public static final double kRetractDistance = -3.5;
-    public static final double kintakedistance = 5;
+    public static final double kintakedistance = 200;
 
     public static final double kShotFeedTime = 1.0;
     public static final double Kautoshootimer = 4.0;
@@ -81,7 +81,7 @@ public final class Constants {
     public static final int kCurrentLimit = 80;
 
     public static final double kTopPower = 0.7;
-    public static final double kBottomPower = 0.8;
+    public static final double kBottomPower = .75;
   }
   public static final class hang{
      public static final int leftcanID = 9;
@@ -131,7 +131,7 @@ public final class Constants {
     public static final int kFrontRightTurningCanId = 3;
     public static final int kRearRightTurningCanId = 1;
 
-    public static final boolean kGyroReversed = false;
+    public static final boolean kGyroReversed = true;
   }
 
   public static final class ModuleConstants {

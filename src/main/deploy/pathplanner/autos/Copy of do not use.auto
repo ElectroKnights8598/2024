@@ -30,7 +30,7 @@
           }
         },
         {
-          "type": "race",
+          "type": "parallel",
           "data": {
             "commands": [
               {
@@ -63,6 +63,49 @@
         {
           "type": "named",
           "data": {
+            "name": "launchthenote2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "armdown"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "mid path 3"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "intake"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "armup"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "mid path 4"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
             "name": "launchthenote"
           }
         },
@@ -70,6 +113,12 @@
           "type": "named",
           "data": {
             "name": "armdown"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "New Path"
           }
         }
       ]

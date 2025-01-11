@@ -31,5 +31,6 @@ public class ArmUp extends Command{
 
           @Override
           public void end(boolean interrupted) {
+            SmartDashboard.putString("apple", "Arm up is finoshed");
           }
 }

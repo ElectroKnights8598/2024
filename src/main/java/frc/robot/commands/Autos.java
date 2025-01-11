@@ -11,10 +11,15 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import frc.robot.Constants;
+import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 
-public class Autos {
+public class Autos extends Command{
   DriveSubsystem m_driveSubsystem  = DriveSubsystem.getInstance();
+  ArmSubsystem m_arm =  ArmSubsystem.getInstance();
       private final SendableChooser<Command> autonChooser;
      
      
@@ -24,6 +29,8 @@ public class Autos {
       ArmUp armup  = new ArmUp();
     FeedLauncher feedLauncher = new FeedLauncher();
     LaunchTheNote launchTheNote = new LaunchTheNote();
+    Launchthenote2 launchthenote2 = new Launchthenote2();
+    newintakecommad newintic = new newintakecommad();
 
       public Autos(){
 AutoBuilder.configureHolonomic(
@@ -32,10 +39,10 @@ AutoBuilder.configureHolonomic(
       m_driveSubsystem::getRobotRelativeSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
       m_driveSubsystem::driveRobotRelative, // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds
       new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your Constants class
-              new PIDConstants(5.0, 0.0, 0.0), // Translation PID constants
-              new PIDConstants(5.0, 0.0, 0.0), // Rotation PID constants
-              4.5, // Max module speed, in m/s
-              0.4, // Drive base radius in meters. Distance from robot center to furthest module.
+              new PIDConstants(2, 0.0, 0.0), // Translation PID constants
+              new PIDConstants(1.5, 0.0, 0.0), // Rotation PID constants
+              3, // Max module speed, in m/s
+              .521, // Drive base radius in meters. Distance from robot center to furthest module.
               new ReplanningConfig() // Default path replanning config. See the API for the options here
       ),
       () -> {
@@ -56,24 +63,32 @@ AutoBuilder.configureHolonomic(
 
         autonChooser = new SendableChooser<Command>();
         NamedCommands.registerCommand("intake", intake.andThen(retract));
-        NamedCommands.registerCommand("armdown", armdown);
-        NamedCommands.registerCommand("armup", armup);
+        NamedCommands.registerCommand("armdown",  new InstantCommand(() -> m_arm.setTargetPosition(Constants.Arm.kIntakePosition)));
+        NamedCommands.registerCommand("armup",  new InstantCommand(() -> m_arm.setTargetPosition(Constants.Arm.kScoringPosition)));
         NamedCommands.registerCommand("feedlauncher", feedLauncher);
+        NamedCommands.registerCommand("launchthenote2", launchthenote2);
+        NamedCommands.registerCommand("newint", newintic);
          NamedCommands.registerCommand("launchthenote", launchTheNote);
-         autonChooser.setDefaultOption("nope", null);
+         autonChooser.setDefaultOption("nope", new InstantCommand());
          buildAuto("route");
-         buildAuto("testarm");
+         buildAuto("spline");
+        // buildAuto("testarm");
          buildAuto("shoot");
      buildAuto("left 1 note");
       buildAuto("left 2 note");
+      buildAuto("do not use");
+      buildAuto("moveup");
+      buildAuto("3 note");
        SmartDashboard.putData("Auton Chooser", autonChooser);
-
+autonChooser.addOption("TestArm", new TestArm());
      
        
       }
       public Command getSelected() {
         return autonChooser.getSelected();
       }
+     
+       
     
         private void buildAuto(String autoName) {
             Command autoCommand = AutoBuilder.buildAuto(autoName);

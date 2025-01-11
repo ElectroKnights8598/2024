@@ -6,42 +6,34 @@ import frc.robot.Constants;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LauncherSubsystem;
 import edu.wpi.first.wpilibj.Timer;
-public class LaunchTheNote extends Command{
+public class newintakecommad extends Command{
     private Timer m_timer;
-    
-
     IntakeSubsystem m_intake = IntakeSubsystem.getInstance();
-    LauncherSubsystem m_launcher = LauncherSubsystem.getInstance();
-    
     // help
-    public LaunchTheNote(){
+    public newintakecommad(){
       
-        addRequirements(m_intake, m_launcher);
+        addRequirements(m_intake);
     }
     @Override
           public void initialize() {
             m_timer = new Timer();
-            m_timer.restart();
+            m_timer.start();
           }
 
           @Override
           public void execute() {
-            if(m_timer.get()>=1){
-            m_intake.setPower(1);
-            }
-            m_launcher.auto();
-            //m_launcher.runLauncher();
+            m_intake.setPower(.5);
 
           }
 
           @Override
           public boolean isFinished() {
-            return m_timer.get() > 1.5;
+            return m_timer.get() > 3;
           }
 
           @Override
           public void end(boolean interrupted) {
             m_intake.setPower(0);
-            m_launcher.stopLauncher();
+           
           }
 }

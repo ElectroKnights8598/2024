@@ -170,6 +170,9 @@ Autos auto = new Autos();
     // launcher controls (button to pre-spin the launcher and button to launch)
     new JoystickButton(m_driverController2, XboxController.Button.kA.value)
         .whileTrue(new RunCommand(() -> m_launcher.runLauncher(), m_launcher));
+
+        new JoystickButton(m_driverController2, XboxController.Button.kBack.value)
+        .whileTrue(new RunCommand(() -> m_launcher.amp(), m_launcher));
       // hang code so comment from here 
         new JoystickButton(m_driverController,XboxController.Button.kLeftBumper.value)
         .whileTrue(new RunCommand(()-> m_hangleft.turnon(), m_hangleft));
@@ -183,7 +186,7 @@ Autos auto = new Autos();
     new JoystickButton(m_driverController2, XboxController.Button.kB.value)
         .whileTrue(new RunCommand(() -> m_intake.setPower(1)));
          new JoystickButton(m_driverController2, XboxController.Button.kX.value)
-        .whileTrue(new RunCommand(() -> m_launcher.amplaunch(), m_launcher));
+        .whileTrue(new RunCommand(() -> m_launcher.auto(), m_launcher));
         // to here out with the same method on top
 // regular code
     new JoystickButton(m_driverController2, XboxController.Button.kY.value)

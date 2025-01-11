@@ -33,7 +33,8 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
    
-    //CameraServer.startAutomaticCapture().setVideoMode(PixelFormat.kYUYV, 320, 180, 30);
+   CameraServer.startAutomaticCapture().setVideoMode(PixelFormat.kYUYV, 320, 180, 30);
+   
   }
 
   /**

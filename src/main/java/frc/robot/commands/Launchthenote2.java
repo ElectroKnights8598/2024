@@ -6,7 +6,7 @@ import frc.robot.Constants;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LauncherSubsystem;
 import edu.wpi.first.wpilibj.Timer;
-public class LaunchTheNote extends Command{
+public class Launchthenote2 extends Command{
     private Timer m_timer;
     
 
@@ -14,7 +14,7 @@ public class LaunchTheNote extends Command{
     LauncherSubsystem m_launcher = LauncherSubsystem.getInstance();
     
     // help
-    public LaunchTheNote(){
+    public Launchthenote2(){
       
         addRequirements(m_intake, m_launcher);
     }
@@ -29,7 +29,7 @@ public class LaunchTheNote extends Command{
             if(m_timer.get()>=1){
             m_intake.setPower(1);
             }
-            m_launcher.auto();
+            m_launcher.runLauncher();
             //m_launcher.runLauncher();
 
           }

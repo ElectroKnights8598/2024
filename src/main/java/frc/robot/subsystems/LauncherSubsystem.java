@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.sysid.SysIdRoutineLog.State;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -30,8 +31,9 @@ public static LauncherSubsystem getInstance(){
 }
 enum state{
   launchnormal,
-  DOWN,
+  Auto,
   StOP,
+  AMP,
   IDLE
   }
   state current = state.IDLE;
@@ -66,15 +68,17 @@ enum state{
   public void runLauncher() {
    current = state.launchnormal;
   }
-
+public void amp(){
+  current = state.AMP;
+}
   /**
    * Turns the launcher off.  Can be run once and the launcher will stay running or run continuously in a {@code RunCommand}.
    */
   public void stopLauncher() {
   current = state.StOP;
   }
-  public void amplaunch(){
-     current = state.DOWN;
+  public void auto(){
+     current = state.Auto;
   }
 
 
@@ -95,11 +99,16 @@ enum state{
       m_bottomMotor.set(0.0);
       }
       break;
-      case DOWN:{
-        m_topMotor.set(.2);
+      case Auto:{
+        m_topMotor.set(.9);
+        m_bottomMotor.set(1);
+      }
+      break;
+case AMP:{
+        m_topMotor.set(.25);
         m_bottomMotor.set(.1);
       }
-
+      break;
    
     default:
       break;
